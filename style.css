@@ -329,6 +329,7 @@ section{ padding: 80px 0; position:relative; }
   border-color: rgba(243,146,40,0.4);
 }
 .team-photo{
+  position: relative;
   aspect-ratio: 4 / 3;
   background:
     repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 14px),
@@ -352,6 +353,20 @@ section{ padding: 80px 0; position:relative; }
   border: 1.5px dashed var(--linea);
   padding: 9px 16px;
   border-radius: 999px;
+}
+.team-season-badge{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(10,9,8,0.72);
+  color: var(--ambra-soft);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
 }
 .team-card-body{
   padding: 20px 22px 24px;
@@ -515,6 +530,46 @@ section{ padding: 80px 0; position:relative; }
   background: rgba(255,255,255,0.5);
 }
 
+/* ---------- sponsor: nastro a scorrimento ---------- */
+.sponsor-marquee{
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.sponsor-track{
+  display:flex;
+  align-items:center;
+  gap: 36px;
+  width: max-content;
+  animation: sponsor-scroll 38s linear infinite;
+}
+.sponsor-marquee:hover .sponsor-track{
+  animation-play-state: paused;
+}
+.sponsor-item{
+  flex: 0 0 auto;
+  width: 150px;
+  height: 150px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid var(--linea);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 16px;
+}
+.sponsor-item img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display:block;
+}
+@keyframes sponsor-scroll{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+
 /* ---------- partnership ---------- */
 .partnership-grid{
   display:grid;
@@ -548,6 +603,9 @@ section{ padding: 80px 0; position:relative; }
   color: var(--crema);
   padding: 9px 18px;
   border-radius: 999px;
+}
+.squadre-season-tag{
+  margin-top: 16px;
 }
 .partnership-image{
   border-radius: 16px;
@@ -696,5 +754,7 @@ section{ padding: 80px 0; position:relative; }
   .wrap{ padding: 0 20px; }
   .hero{ padding: 56px 0 44px; }
   .teams-grid{ grid-template-columns: 1fr; }
+  .sponsor-item{ width: 110px; height: 110px; padding: 12px; }
+  .sponsor-track{ gap: 24px; }
   section{ padding: 56px 0; }
 }

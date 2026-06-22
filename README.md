@@ -17,18 +17,40 @@ Sito statico (HTML + CSS + JS puro, nessuna build necessaria).
 │   ├── logo30-testo.png      → logo testuale "30° Anniversario" (disponibile per altri usi)
 │   ├── divisa-bgv.jpeg       → render della divisa ufficiale nero/arancione
 │   ├── tezenis-partnership.jpg → locandina partnership Tezenis Basketball Academy
-│   └── squadre/
-│       ├── csi-a2.jpg
-│       ├── under-17.jpg
-│       ├── under-15.jpg
-│       ├── under-13.jpg
-│       ├── aquilotti.jpg
-│       └── scoiattoli.jpg
+│   ├── squadre/
+│   │   ├── csi-a2.jpg
+│   │   ├── under-17.jpg
+│   │   ├── under-15.jpg
+│   │   ├── under-13.jpg
+│   │   ├── aquilotti.jpg
+│   │   └── scoiattoli.jpg
+│   └── sponsor/
+│       ├── boaria-nuova.png
+│       ├── farmacia-sabini.png
+│       ├── ferrari-alfro.png
+│       ├── k2.png
+│       ├── lonardi.png
+│       ├── marangoni.png
+│       ├── motterani.png
+│       ├── paradiso.png
+│       ├── perobelli-gomme.png
+│       ├── stella.png
+│       ├── turazza.png
+│       └── waki.png
 ├── vercel.json     → configurazione minima per Vercel
 └── README.md
 ```
 
-Tutte le squadre hanno la loro foto reale in `assets/squadre/`.
+Tutte le squadre hanno la loro foto reale in `assets/squadre/` (stagione 2025/2026). I loghi sponsor sono in `assets/sponsor/`, mostrati in ordine alfabetico nel nastro a scorrimento della sezione "Sponsor".
+
+## Aggiungere o modificare uno sponsor
+
+1. Carica il logo (preferibilmente quadrato, sfondo bianco o trasparente) in `assets/sponsor/`
+2. In `index.html`, dentro la sezione `id="sponsor"`, copia una riga esistente come:
+   ```html
+   <div class="sponsor-item"><img src="assets/sponsor/nome-file.png" alt="Nome Sponsor"></div>
+   ```
+   e aggiorna nome file e alt. **Ricorda di aggiungerla due volte**: una nel primo blocco, una nel blocco "duplicato per loop continuo" subito sotto — altrimenti il nastro a scorrimento mostrerà un salto visibile a ogni giro.
 
 ## Come pubblicare il sito
 
