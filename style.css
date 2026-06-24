@@ -249,7 +249,7 @@ a{ color: inherit; }
   background-image: url('assets/bgv-banner.png');
   background-repeat: repeat;
   background-size: 480px auto;
-  opacity: 0.06;
+  opacity: 0.22;
   filter: grayscale(0.3);
   z-index: 0;
   animation: hero-bg-scroll 50s linear infinite;
@@ -262,7 +262,7 @@ a{ color: inherit; }
   content:"";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10,9,8,0.55) 0%, var(--bosco) 92%);
+  background: linear-gradient(180deg, rgba(10,9,8,0.35) 0%, var(--bosco) 96%);
   z-index: 0;
 }
 .hero .wrap{
