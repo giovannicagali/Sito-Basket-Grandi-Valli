@@ -75,45 +75,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Contatori animati (numeri che contano da 0 al valore finale quando entrano in vista)
-  var counterEls = document.querySelectorAll('.counter-num');
-
-  if (counterEls.length) {
-    var animateCounter = function (el) {
-      var target = parseInt(el.getAttribute('data-target'), 10) || 0;
-      var duration = 1400;
-      var startTime = null;
-
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        var progress = Math.min((timestamp - startTime) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(eased * target);
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          el.textContent = target;
-        }
-      }
-      requestAnimationFrame(step);
-    };
-
-    if ('IntersectionObserver' in window) {
-      var counterObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            counterObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.4 });
-
-      counterEls.forEach(function (el) { counterObserver.observe(el); });
-    } else {
-      counterEls.forEach(function (el) {
-        el.textContent = el.getAttribute('data-target');
-      });
-    }
-  }
-
 });
