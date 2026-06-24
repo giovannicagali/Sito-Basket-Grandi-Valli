@@ -1,6 +1,6 @@
 # Basket Grandi Valli (BGV)
 
-Sito ufficiale della società di pallacanestro **Basket Grandi Valli** — Roncanova (VR), attiva dal 1996.
+Sito ufficiale della società di pallacanestro **Basket Grandi Valli** — Gazzo Veronese (VR), attiva dal 1996.
 
 Sito statico (HTML + CSS + JS puro, nessuna build necessaria).
 
