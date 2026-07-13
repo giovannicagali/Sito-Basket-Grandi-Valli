@@ -842,17 +842,18 @@ section{ padding: 80px 0; position:relative; }
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 28px;
+  font-size: 58px;
   line-height: 1;
-  padding: 4px 6px;
+  padding: 2px 4px;
   border-radius: 50%;
   transition: transform .2s;
   display:flex;
   align-items:center;
   justify-content:center;
   order: -1;
+  filter: drop-shadow(0 2px 6px rgba(255,100,160,0.4));
 }
-.lavinia-ribbon:hover{ transform: scale(1.25) rotate(-8deg); }
+.lavinia-ribbon:hover{ transform: scale(1.2) rotate(-8deg); }
 .ribbon-bow{ display:block; }
 
 /* Overlay */
