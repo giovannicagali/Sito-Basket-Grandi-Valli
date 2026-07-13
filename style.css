@@ -836,3 +836,132 @@ section{ padding: 80px 0; position:relative; }
   .sponsor-track{ gap: 24px; }
   section{ padding: 56px 0; }
 }
+
+/* ===== FIOCCO LAVINIA ===== */
+.lavinia-ribbon{
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 50%;
+  transition: transform .2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  order: -1;
+}
+.lavinia-ribbon:hover{ transform: scale(1.25) rotate(-8deg); }
+.ribbon-bow{ display:block; }
+
+/* Overlay */
+.lavinia-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+}
+.lavinia-overlay.is-open{
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Modale */
+.lavinia-modal{
+  background: linear-gradient(145deg, #fff0f6 0%, #ffe4ef 50%, #ffd6e8 100%);
+  border-radius: 28px;
+  padding: 44px 52px 40px;
+  text-align: center;
+  max-width: 440px;
+  width: 90%;
+  box-shadow:
+    0 32px 80px rgba(255,100,160,0.25),
+    0 0 0 3px rgba(255,150,190,0.4),
+    0 0 0 8px rgba(255,200,220,0.2);
+  transform: scale(0.85) translateY(20px);
+  transition: transform .4s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+}
+.lavinia-overlay.is-open .lavinia-modal{
+  transform: scale(1) translateY(0);
+}
+
+.lavinia-close{
+  position: absolute;
+  top: 14px; right: 18px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #d06090;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity .15s, transform .15s;
+}
+.lavinia-close:hover{ opacity:1; transform: scale(1.2); }
+
+.lavinia-hearts-top,
+.lavinia-hearts-bottom{
+  display:flex;
+  justify-content:center;
+  gap: 12px;
+  font-size: 22px;
+}
+.lavinia-hearts-top{ margin-bottom: 10px; }
+.lavinia-hearts-bottom{ margin-top: 10px; }
+
+.lavinia-big-ribbon{
+  font-size: 64px;
+  line-height: 1;
+  margin-bottom: 14px;
+  animation: ribbon-swing 2.5s ease-in-out infinite;
+}
+@keyframes ribbon-swing{
+  0%,100%{ transform: rotate(-6deg) scale(1); }
+  50%{ transform: rotate(6deg) scale(1.08); }
+}
+
+.lavinia-title{
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #c0607a;
+  margin: 0 0 4px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.lavinia-name{
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 58px;
+  font-weight: 600;
+  color: #d63070;
+  margin: 0 0 6px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+.lavinia-date{
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #b05070;
+  letter-spacing: 4px;
+  margin: 0 0 16px;
+}
+.lavinia-heart{
+  font-size: 46px;
+  animation: heart-beat 1.2s ease-in-out infinite;
+}
+@keyframes heart-beat{
+  0%,100%{ transform: scale(1); }
+  15%{ transform: scale(1.25); }
+  30%{ transform: scale(1); }
+  45%{ transform: scale(1.15); }
+}
