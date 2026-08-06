@@ -97,4 +97,58 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ── Carosello Novità ────────────────────────────────────────────────
+  var newsCarousel = document.getElementById('newsCarousel');
+  var newsDotsWrap = document.getElementById('newsDots');
+  var newsPrev     = document.getElementById('newsPrev');
+  var newsNext     = document.getElementById('newsNext');
+
+  if (newsCarousel && newsDotsWrap) {
+    var newsCards   = newsCarousel.querySelectorAll('.news-card');
+    var newsCurrent = 0;
+
+    // Genera i dots
+    newsCards.forEach(function (_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'news-dot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Vai alla news ' + (i + 1));
+      dot.addEventListener('click', function () { newsGoTo(i); });
+      newsDotsWrap.appendChild(dot);
+    });
+
+    var newsDots = newsDotsWrap.querySelectorAll('.news-dot');
+
+    function newsGoTo(index) {
+      newsCurrent = (index + newsCards.length) % newsCards.length;
+      // Calcola offset: scorri la card attiva al centro
+      var cardEl    = newsCards[newsCurrent];
+      var wrapEl    = newsCarousel.parentElement;
+      var cardLeft  = cardEl.offsetLeft;
+      var cardW     = cardEl.offsetWidth;
+      var wrapW     = wrapEl.offsetWidth;
+      var offset    = cardLeft - (wrapW - cardW) / 2;
+      newsCarousel.style.transform = 'translateX(-' + Math.max(0, offset) + 'px)';
+      newsDots.forEach(function (d, i) {
+        d.classList.toggle('is-active', i === newsCurrent);
+      });
+    }
+
+    if (newsPrev) newsPrev.addEventListener('click', function () { newsGoTo(newsCurrent - 1); });
+    if (newsNext) newsNext.addEventListener('click', function () { newsGoTo(newsCurrent + 1); });
+
+    // Swipe su mobile
+    var touchStartX = 0;
+    newsCarousel.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    newsCarousel.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) newsGoTo(dx < 0 ? newsCurrent + 1 : newsCurrent - 1);
+    });
+
+    // Nasconde frecce se c'è una sola card
+    if (newsCards.length <= 1 && newsPrev && newsNext) {
+      newsPrev.style.display = 'none';
+      newsNext.style.display = 'none';
+    }
+  }
+
 });
