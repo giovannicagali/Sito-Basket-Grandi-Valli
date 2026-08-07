@@ -27,6 +27,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Dropdown contatti rapidi
+  var quickToggle   = document.getElementById('quickToggle');
+  var quickDropdown = document.getElementById('quickDropdown');
+
+  if (quickToggle && quickDropdown) {
+    quickToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = quickDropdown.classList.toggle('is-open');
+      quickToggle.classList.toggle('is-open', isOpen);
+      quickToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Chiudi cliccando fuori
+    document.addEventListener('click', function () {
+      quickDropdown.classList.remove('is-open');
+      quickToggle.classList.remove('is-open');
+      quickToggle.setAttribute('aria-expanded', 'false');
+    });
+
+    // Chiudi premendo Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        quickDropdown.classList.remove('is-open');
+        quickToggle.classList.remove('is-open');
+        quickToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // Reveal on scroll
   var revealEls = document.querySelectorAll('.reveal');
 
