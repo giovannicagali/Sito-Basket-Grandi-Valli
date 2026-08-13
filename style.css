@@ -1413,3 +1413,246 @@ section{ padding: 80px 0; position:relative; }
   .sponsor-grid-full{ grid-template-columns: repeat(2, 1fr); }
   .page-hero{ padding: 48px 0 32px; }
 }
+
+/* ===== FLIP CARD — SQUADRE ===== */
+.flip-hint{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  color: var(--acciaio);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.team-card-flip{
+  perspective: 1000px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 16px;
+}
+.team-card-flip:focus-visible{
+  box-shadow: 0 0 0 3px var(--ambra);
+}
+.flip-inner{
+  position: relative;
+  width: 100%;
+  /* altezza fissa per il flip — corrisponde alla card fronte */
+  min-height: 380px;
+  transform-style: preserve-3d;
+  transition: transform .55s cubic-bezier(0.4,0,0.2,1);
+  border-radius: 16px;
+}
+.team-card-flip.is-flipped .flip-inner{
+  transform: rotateY(180deg);
+}
+.flip-front,
+.flip-back{
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Fronte: uguale alle vecchie .team-card */
+.flip-front{
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  flex-direction: column;
+  transition: border-color .2s, box-shadow .25s;
+}
+.team-card-flip:hover .flip-front{
+  border-color: rgba(243,146,40,.5);
+  box-shadow: 0 12px 32px rgba(0,0,0,.35), 0 0 24px rgba(243,146,40,.15);
+}
+.flip-front .team-photo{
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.flip-front .team-photo img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s;
+}
+.team-card-flip:hover .flip-front .team-photo img{
+  transform: scale(1.04);
+}
+
+/* Retro: roster */
+.flip-back{
+  transform: rotateY(180deg);
+  background: var(--bosco-deep);
+  border: 1px solid var(--ambra);
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px 16px;
+  gap: 12px;
+}
+.roster-header{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid var(--linea);
+  padding-bottom: 12px;
+}
+.roster-header h3{
+  font-family: var(--display);
+  font-size: 22px;
+  text-transform: uppercase;
+  color: var(--ambra);
+  margin: 4px 0 0;
+}
+.roster-coach{
+  font-size: 12px;
+  color: var(--crema-dim);
+  margin: 0;
+  text-transform: none;
+  font-family: var(--sans);
+}
+.roster-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+}
+.roster-list li{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  transition: background .15s;
+}
+.roster-list li:hover{
+  background: rgba(243,146,40,.1);
+}
+.roster-num{
+  font-family: var(--display);
+  font-size: 16px;
+  color: var(--ambra);
+  min-width: 32px;
+  text-align: center;
+}
+.roster-name{
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--crema);
+}
+.flip-back-hint{
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--acciaio);
+  text-align: center;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* ===== CALENDARIO & RISULTATI ===== */
+.cal-section{
+  padding: 0 0 80px;
+}
+.cal-tabs{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 32px 0 0;
+  border-bottom: 1px solid var(--linea);
+  margin-bottom: 0;
+}
+.cal-tab{
+  padding: 10px 22px;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid var(--linea);
+  border-bottom: none;
+  background: rgba(255,255,255,0.03);
+  color: var(--crema-dim);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  position: relative;
+  bottom: -1px;
+}
+.cal-tab:hover{
+  background: rgba(255,255,255,0.07);
+  color: var(--crema);
+}
+.cal-tab.is-active{
+  background: var(--bosco);
+  color: var(--ambra);
+  border-color: var(--ambra);
+  border-bottom-color: var(--bosco);
+}
+.cal-panel{
+  display: none;
+  padding: 48px 0 0;
+}
+.cal-panel.is-active{
+  display: block;
+}
+.cal-block{
+  margin-bottom: 52px;
+}
+.cal-block-header{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.cal-block-header h2{
+  font-family: var(--display);
+  font-size: 26px;
+  text-transform: uppercase;
+  margin: 0;
+}
+.cal-block-icon{
+  font-size: 22px;
+}
+.cal-coming-soon{
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(243,146,40,.15);
+  color: var(--ambra);
+  border: 1px solid rgba(243,146,40,.3);
+}
+.cal-empty{
+  border: 1px dashed var(--linea);
+  border-radius: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255,255,255,0.02);
+}
+.cal-empty-icon{
+  font-size: 42px;
+  opacity: .5;
+}
+.cal-empty p{
+  color: var(--crema-dim);
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.6;
+}

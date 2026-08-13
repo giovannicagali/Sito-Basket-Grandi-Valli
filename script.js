@@ -75,6 +75,39 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ── Flip card squadre ────────────────────────────────────────────────
+  var flipCards = document.querySelectorAll('.team-card-flip');
+  flipCards.forEach(function (card) {
+    function doFlip() {
+      card.classList.toggle('is-flipped');
+    }
+    card.addEventListener('click', doFlip);
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        doFlip();
+      }
+    });
+  });
+
+  // ── Tab calendario & risultati ───────────────────────────────────────
+  var calTabsWrap = document.getElementById('calTabs');
+  if (calTabsWrap) {
+    var calTabs   = calTabsWrap.querySelectorAll('.cal-tab');
+    var calPanels = document.querySelectorAll('.cal-panel');
+
+    calTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var team = tab.getAttribute('data-team');
+        calTabs.forEach(function (t) { t.classList.remove('is-active'); });
+        calPanels.forEach(function (p) { p.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        var panel = document.getElementById('panel-' + team);
+        if (panel) panel.classList.add('is-active');
+      });
+    });
+  }
+
   // Modale Lavinia
   var laviniaBtn     = document.getElementById('laviniaBtn');
   var laviniaOverlay = document.getElementById('laviniaOverlay');
