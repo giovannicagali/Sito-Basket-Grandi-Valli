@@ -77,8 +77,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ── Flip card squadre ────────────────────────────────────────────────
   var flipCards = document.querySelectorAll('.team-card-flip');
+  var autoFlipStopped = false;
+  var autoFlipIndex   = 0;
+  var autoFlipTimer   = null;
+
+  function autoFlipStep() {
+    if (autoFlipStopped || flipCards.length === 0) return;
+
+    var card = flipCards[autoFlipIndex];
+
+    // Gira solo la prima card visibile (fronte→retro→fronte in ciclo)
+    if (!card.classList.contains('is-flipped')) {
+      card.classList.add('is-flipped');
+      // Dopo 2s la rigira in automatico (mostra fronte di nuovo)
+      autoFlipTimer = setTimeout(function () {
+        if (!autoFlipStopped) {
+          card.classList.remove('is-flipped');
+          // Avanza alla prossima card dopo la fine del ribaltamento
+          autoFlipTimer = setTimeout(function () {
+            if (!autoFlipStopped) {
+              autoFlipIndex = (autoFlipIndex + 1) % flipCards.length;
+              autoFlipTimer = setTimeout(autoFlipStep, 4000);
+            }
+          }, 600);
+        }
+      }, 2000);
+    } else {
+      // Era già girata (caso raro) — vai avanti
+      autoFlipIndex = (autoFlipIndex + 1) % flipCards.length;
+      autoFlipTimer = setTimeout(autoFlipStep, 4000);
+    }
+  }
+
+  // Avvia dopo 2s dal caricamento pagina
+  if (flipCards.length > 0) {
+    autoFlipTimer = setTimeout(autoFlipStep, 2000);
+  }
+
   flipCards.forEach(function (card) {
     function doFlip() {
+      // Ferma l'auto-flip al primo click manuale
+      autoFlipStopped = true;
+      clearTimeout(autoFlipTimer);
+      // Rimuovi l'auto-flip da eventuali card ancora girate
+      flipCards.forEach(function (c) {
+        if (c !== card) c.classList.remove('is-flipped');
+      });
       card.classList.toggle('is-flipped');
     }
     card.addEventListener('click', doFlip);
