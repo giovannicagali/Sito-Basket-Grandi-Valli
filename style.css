@@ -404,8 +404,8 @@ section{ padding: 80px 0; position:relative; }
 /* ---------- teams ---------- */
 .teams-grid{
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
 }
 .team-card{
   background: rgba(255,255,255,0.05);
@@ -827,7 +827,7 @@ section{ padding: 80px 0; position:relative; }
   .jersey-30{ order:-1; width: 240px; margin: 0 auto 12px; }
   .contact-grid{ grid-template-columns: 1fr; }
   .identity-grid{ grid-template-columns: 1fr; }
-  .teams-grid{ grid-template-columns: repeat(2, 1fr); }
+  .teams-grid{ grid-template-columns: 1fr; }
   .partnership-grid{ grid-template-columns: 1fr; }
   .partnership-image{ order: -1; max-width: 320px; margin: 0 auto; }
   .nav-toggle{ display:block; }
@@ -1427,25 +1427,33 @@ section{ padding: 80px 0; position:relative; }
   text-transform: uppercase;
 }
 .team-card-flip{
-  perspective: 1000px;
+  perspective: 1200px;
   cursor: pointer;
   outline: none;
   border-radius: 16px;
+  /* Lascia spazio per l'espansione del retro */
+  transition: z-index 0s .55s;
+  z-index: 1;
 }
 .team-card-flip:focus-visible{
   box-shadow: 0 0 0 3px var(--ambra);
 }
+.team-card-flip.is-flipped{
+  z-index: 10;
+  transition: z-index 0s 0s;
+}
 .flip-inner{
   position: relative;
   width: 100%;
-  /* altezza fissa per il flip — corrisponde alla card fronte */
-  min-height: 380px;
+  min-height: 480px;
   transform-style: preserve-3d;
-  transition: transform .55s cubic-bezier(0.4,0,0.2,1);
+  transition: transform .55s cubic-bezier(0.4,0,0.2,1),
+              min-height .55s cubic-bezier(0.4,0,0.2,1);
   border-radius: 16px;
 }
 .team-card-flip.is-flipped .flip-inner{
   transform: rotateY(180deg);
+  min-height: 560px;
 }
 .flip-front,
 .flip-back{
@@ -1492,25 +1500,25 @@ section{ padding: 80px 0; position:relative; }
   border: 1px solid var(--ambra);
   display: flex;
   flex-direction: column;
-  padding: 22px 20px 16px;
-  gap: 12px;
+  padding: 28px 26px 20px;
+  gap: 14px;
 }
 .roster-header{
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   border-bottom: 1px solid var(--linea);
-  padding-bottom: 12px;
+  padding-bottom: 14px;
 }
 .roster-header h3{
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 28px;
   text-transform: uppercase;
   color: var(--ambra);
-  margin: 4px 0 0;
+  margin: 6px 0 0;
 }
 .roster-coach{
-  font-size: 12px;
+  font-size: 13.5px;
   color: var(--crema-dim);
   margin: 0;
   text-transform: none;
@@ -1522,16 +1530,16 @@ section{ padding: 80px 0; position:relative; }
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   flex: 1;
   overflow-y: auto;
 }
 .roster-list li{
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 6px 10px;
-  border-radius: 8px;
+  gap: 16px;
+  padding: 9px 14px;
+  border-radius: 10px;
   background: rgba(255,255,255,0.04);
   transition: background .15s;
 }
@@ -1540,24 +1548,24 @@ section{ padding: 80px 0; position:relative; }
 }
 .roster-num{
   font-family: var(--display);
-  font-size: 16px;
+  font-size: 22px;
   color: var(--ambra);
-  min-width: 32px;
+  min-width: 44px;
   text-align: center;
 }
 .roster-name{
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--crema);
 }
 .flip-back-hint{
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--acciaio);
   text-align: center;
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 10px;
 }
 
 /* ===== CALENDARIO & RISULTATI ===== */
