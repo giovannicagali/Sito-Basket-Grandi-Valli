@@ -39,19 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  // Flip card squadre (clic o tastiera)
-  var flipCards = document.querySelectorAll('.team-card-flip');
-  flipCards.forEach(function (card) {
-    function doFlip() {
-      flipCards.forEach(function (c) { if (c !== card) c.classList.remove('is-flipped'); });
-      card.classList.toggle('is-flipped');
-    }
-    card.addEventListener('click', doFlip);
-    card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doFlip(); }
-    });
-  });
-
   // Tab calendario & risultati
   var calTabsWrap = document.getElementById('calTabs');
   if (calTabsWrap) {
