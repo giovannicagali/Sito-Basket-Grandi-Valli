@@ -4,9 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Anno corrente nel footer
   var yearEl = document.getElementById('year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // Menu mobile
   var navToggle = document.getElementById('navToggle');
@@ -17,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
       var isOpen = mainNav.classList.toggle('is-open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
-
-    // Chiudi il menu quando si clicca un link
     mainNav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mainNav.classList.remove('is-open');
@@ -29,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Reveal on scroll
   var revealEls = document.querySelectorAll('.reveal');
-
   if ('IntersectionObserver' in window && revealEls.length) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -39,107 +34,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }, { threshold: 0.15 });
-
-    revealEls.forEach(function (el) {
-      observer.observe(el);
-    });
+    revealEls.forEach(function (el) { observer.observe(el); });
   } else {
-    // Fallback: mostra tutto subito
-    revealEls.forEach(function (el) {
-      el.classList.add('is-visible');
-    });
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  // Tilt 3D sulle card squadra (disattivato se l'utente preferisce meno movimento o su touch)
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isTouchDevice = window.matchMedia('(hover: none)').matches;
-
-  if (!prefersReducedMotion && !isTouchDevice) {
-    var tiltCards = document.querySelectorAll('.team-card');
-
-    tiltCards.forEach(function (card) {
-      card.addEventListener('mousemove', function (e) {
-        var rect = card.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
-        var centerX = rect.width / 2;
-        var centerY = rect.height / 2;
-        var rotateX = ((y - centerY) / centerY) * -6;
-        var rotateY = ((x - centerX) / centerX) * 6;
-        card.style.transform = 'perspective(700px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
-      });
-
-      card.addEventListener('mouseleave', function () {
-        card.style.transform = '';
-      });
-    });
-  }
-
-  // ── Flip card squadre ────────────────────────────────────────────────
+  // Flip card squadre (clic o tastiera)
   var flipCards = document.querySelectorAll('.team-card-flip');
-  var autoFlipStopped = false;
-  var autoFlipIndex   = 0;
-  var autoFlipTimer   = null;
-
-  function autoFlipStep() {
-    if (autoFlipStopped || flipCards.length === 0) return;
-
-    var card = flipCards[autoFlipIndex];
-
-    // Gira solo la prima card visibile (fronte→retro→fronte in ciclo)
-    if (!card.classList.contains('is-flipped')) {
-      card.classList.add('is-flipped');
-      // Dopo 2s la rigira in automatico (mostra fronte di nuovo)
-      autoFlipTimer = setTimeout(function () {
-        if (!autoFlipStopped) {
-          card.classList.remove('is-flipped');
-          // Avanza alla prossima card dopo la fine del ribaltamento
-          autoFlipTimer = setTimeout(function () {
-            if (!autoFlipStopped) {
-              autoFlipIndex = (autoFlipIndex + 1) % flipCards.length;
-              autoFlipTimer = setTimeout(autoFlipStep, 4000);
-            }
-          }, 600);
-        }
-      }, 2000);
-    } else {
-      // Era già girata (caso raro) — vai avanti
-      autoFlipIndex = (autoFlipIndex + 1) % flipCards.length;
-      autoFlipTimer = setTimeout(autoFlipStep, 4000);
-    }
-  }
-
-  // Avvia dopo 2s dal caricamento pagina
-  if (flipCards.length > 0) {
-    autoFlipTimer = setTimeout(autoFlipStep, 2000);
-  }
-
   flipCards.forEach(function (card) {
     function doFlip() {
-      // Ferma l'auto-flip al primo click manuale
-      autoFlipStopped = true;
-      clearTimeout(autoFlipTimer);
-      // Rimuovi l'auto-flip da eventuali card ancora girate
-      flipCards.forEach(function (c) {
-        if (c !== card) c.classList.remove('is-flipped');
-      });
+      flipCards.forEach(function (c) { if (c !== card) c.classList.remove('is-flipped'); });
       card.classList.toggle('is-flipped');
     }
     card.addEventListener('click', doFlip);
     card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        doFlip();
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doFlip(); }
     });
   });
 
-  // ── Tab calendario & risultati ───────────────────────────────────────
+  // Tab calendario & risultati
   var calTabsWrap = document.getElementById('calTabs');
   if (calTabsWrap) {
-    var calTabs   = calTabsWrap.querySelectorAll('.cal-tab');
+    var calTabs = calTabsWrap.querySelectorAll('.cal-tab');
     var calPanels = document.querySelectorAll('.cal-panel');
-
     calTabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
         var team = tab.getAttribute('data-team');
@@ -153,79 +70,19 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Modale Lavinia
-  var laviniaBtn     = document.getElementById('laviniaBtn');
+  var laviniaBtn = document.getElementById('laviniaBtn');
   var laviniaOverlay = document.getElementById('laviniaOverlay');
-  var laviniaClose   = document.getElementById('laviniaClose');
+  var laviniaClose = document.getElementById('laviniaClose');
 
   if (laviniaBtn && laviniaOverlay) {
-    laviniaBtn.addEventListener('click', function () {
-      laviniaOverlay.classList.add('is-open');
-    });
-    laviniaClose.addEventListener('click', function () {
-      laviniaOverlay.classList.remove('is-open');
-    });
+    laviniaBtn.addEventListener('click', function () { laviniaOverlay.classList.add('is-open'); });
+    if (laviniaClose) laviniaClose.addEventListener('click', function () { laviniaOverlay.classList.remove('is-open'); });
     laviniaOverlay.addEventListener('click', function (e) {
-      if (e.target === laviniaOverlay) {
-        laviniaOverlay.classList.remove('is-open');
-      }
+      if (e.target === laviniaOverlay) laviniaOverlay.classList.remove('is-open');
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') laviniaOverlay.classList.remove('is-open');
     });
-  }
-
-  // ── Carosello Novità ────────────────────────────────────────────────
-  var newsCarousel = document.getElementById('newsCarousel');
-  var newsDotsWrap = document.getElementById('newsDots');
-  var newsPrev     = document.getElementById('newsPrev');
-  var newsNext     = document.getElementById('newsNext');
-
-  if (newsCarousel && newsDotsWrap) {
-    var newsCards   = newsCarousel.querySelectorAll('.news-card');
-    var newsCurrent = 0;
-
-    // Genera i dots
-    newsCards.forEach(function (_, i) {
-      var dot = document.createElement('button');
-      dot.className = 'news-dot' + (i === 0 ? ' is-active' : '');
-      dot.setAttribute('aria-label', 'Vai alla news ' + (i + 1));
-      dot.addEventListener('click', function () { newsGoTo(i); });
-      newsDotsWrap.appendChild(dot);
-    });
-
-    var newsDots = newsDotsWrap.querySelectorAll('.news-dot');
-
-    function newsGoTo(index) {
-      newsCurrent = (index + newsCards.length) % newsCards.length;
-      // Calcola offset: scorri la card attiva al centro
-      var cardEl    = newsCards[newsCurrent];
-      var wrapEl    = newsCarousel.parentElement;
-      var cardLeft  = cardEl.offsetLeft;
-      var cardW     = cardEl.offsetWidth;
-      var wrapW     = wrapEl.offsetWidth;
-      var offset    = cardLeft - (wrapW - cardW) / 2;
-      newsCarousel.style.transform = 'translateX(-' + Math.max(0, offset) + 'px)';
-      newsDots.forEach(function (d, i) {
-        d.classList.toggle('is-active', i === newsCurrent);
-      });
-    }
-
-    if (newsPrev) newsPrev.addEventListener('click', function () { newsGoTo(newsCurrent - 1); });
-    if (newsNext) newsNext.addEventListener('click', function () { newsGoTo(newsCurrent + 1); });
-
-    // Swipe su mobile
-    var touchStartX = 0;
-    newsCarousel.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
-    newsCarousel.addEventListener('touchend', function (e) {
-      var dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) newsGoTo(dx < 0 ? newsCurrent + 1 : newsCurrent - 1);
-    });
-
-    // Nasconde frecce se c'è una sola card
-    if (newsCards.length <= 1 && newsPrev && newsNext) {
-      newsPrev.style.display = 'none';
-      newsNext.style.display = 'none';
-    }
   }
 
 });
