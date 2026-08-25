@@ -1083,3 +1083,89 @@ section{ padding: 72px 0; position:relative; }
   .lavinia-ribbon span{ display:none; }
   .lavinia-ribbon{ padding: 9px; }
 }
+
+/* ---------- Instagram: muro a due file ---------- */
+.ig-wall{
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background: var(--bosco);
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+}
+.ig-rows{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 0;
+}
+.ig-row{
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: ig-scroll 55s linear infinite;
+}
+.ig-row-rev{ animation-direction: reverse; }
+.ig-wall:hover .ig-row{ animation-play-state: paused; }
+@keyframes ig-scroll{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+.ig-tile{
+  flex: 0 0 auto;
+  width: 280px;
+  height: 200px;
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  display: block;
+}
+.ig-tile img{ width: 100%; height: 100%; object-fit: cover; }
+.ig-skel{
+  flex: 0 0 auto;
+  width: 280px;
+  height: 200px;
+  border-radius: var(--r-pill);
+  background: rgba(255,255,255,0.07);
+  animation: ig-pulse 1.6s ease-in-out infinite;
+}
+@keyframes ig-pulse{
+  0%, 100%{ opacity: .3; }
+  50%{ opacity: .6; }
+}
+.ig-rows[data-state="empty"]{ display: none; }
+.ig-wall .ig-veil{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(20,17,13,.96) 0%, rgba(20,17,13,.55) 40%, rgba(20,17,13,.55) 60%, rgba(20,17,13,.96) 100%);
+}
+.ig-rows[data-state="empty"] ~ .ig-veil{ background: rgba(20,17,13,.55); }
+.ig-content{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 18px;
+  padding: 0 40px;
+}
+.eyebrow-center::after{ content:""; width: 30px; height: 2px; background: var(--ambra); display:inline-block; }
+.ig-content h2{
+  font-size: clamp(30px, 4.4vw, 52px);
+  margin: 0;
+}
+.ig-content p{
+  margin: 0;
+  max-width: 440px;
+  font-size: 15px;
+  color: var(--crema-dim);
+}
+.ig-rows[data-state="empty"] + .ig-veil + .ig-content,
+.ig-wall[data-fallback="true"] .ig-content{ position: relative; padding: 64px 40px; }
+
+@media (max-width: 620px){
+  .ig-tile, .ig-skel{ width: 190px; height: 140px; }
+  .ig-content{ gap: 14px; }
+  .ig-content p{ font-size: 14px; }
+}

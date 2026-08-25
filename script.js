@@ -56,6 +56,77 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+
+  // Instagram — muro a due file alimentato dal widget esterno.
+  // Incolla qui l'indirizzo del feed (es. Behold: https://feeds.behold.so/XXXXXXXX)
+  var IG_FEED_URL = 'https://feeds.behold.so/WPlVGJehRqXpt8NA4iar';
+  var IG_POSTS = 10; // post mostrati (5 per fila)
+
+  var igRows = document.getElementById('igRows');
+  var igWall = document.getElementById('igWall');
+
+  if (igRows && igWall) {
+    var rowA = document.getElementById('igRowA');
+    var rowB = document.getElementById('igRowB');
+
+    function igSkeletons() {
+      [rowA, rowB].forEach(function (row) {
+        row.innerHTML = '';
+        for (var i = 0; i < 6; i++) {
+          var s = document.createElement('span');
+          s.className = 'ig-skel';
+          s.style.animationDelay = (i * 0.15) + 's';
+          row.appendChild(s);
+        }
+      });
+    }
+
+    function igFallback() {
+      igRows.setAttribute('data-state', 'empty');
+      igWall.setAttribute('data-fallback', 'true');
+    }
+
+    function igTile(post) {
+      var a = document.createElement('a');
+      a.className = 'ig-tile';
+      a.href = post.permalink || 'https://instagram.com/basketgrandivalli';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      var img = document.createElement('img');
+      img.src = post.thumbnailUrl || post.mediaUrl || post.media_url || '';
+      img.alt = (post.prunedCaption || post.caption || 'Post Instagram di Basket Grandi Valli').slice(0, 110);
+      img.loading = 'lazy';
+      a.appendChild(img);
+      return a;
+    }
+
+    function igRender(posts) {
+      if (!posts || !posts.length) { igFallback(); return; }
+      var list = posts.slice(0, IG_POSTS);
+      var half = Math.ceil(list.length / 2);
+      var sets = [list.slice(0, half), list.slice(half).length ? list.slice(half) : list.slice(0, half)];
+
+      [rowA, rowB].forEach(function (row, idx) {
+        row.innerHTML = '';
+        // doppia sequenza: serve per far ripartire lo scorrimento senza stacchi
+        sets[idx].concat(sets[idx]).forEach(function (post) {
+          row.appendChild(igTile(post));
+        });
+      });
+      igRows.setAttribute('data-state', 'ready');
+    }
+
+    if (!IG_FEED_URL) {
+      igFallback();
+    } else {
+      igSkeletons();
+      fetch(IG_FEED_URL)
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+        .then(function (data) { igRender(Array.isArray(data) ? data : (data.posts || [])); })
+        .catch(igFallback);
+    }
+  }
+
   // Modale Lavinia
   var laviniaBtn = document.getElementById('laviniaBtn');
   var laviniaOverlay = document.getElementById('laviniaOverlay');
