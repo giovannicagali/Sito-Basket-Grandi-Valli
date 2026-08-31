@@ -127,6 +127,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // Modale Open Day
+  var opendayBtn = document.getElementById('opendayBtn');
+  var opendayOverlay = document.getElementById('opendayOverlay');
+  var opendayClose = document.getElementById('opendayClose');
+  var OPENDAY_DEADLINE = new Date('2026-09-07T00:00:00');
+
+  if (opendayOverlay) {
+    var opendayOpen = function () { opendayOverlay.classList.add('is-open'); };
+    var opendayHide = function () {
+      opendayOverlay.classList.remove('is-open');
+      try { sessionStorage.setItem('bgvOpendaySeen', '1'); } catch (e) {}
+    };
+
+    if (opendayBtn) opendayBtn.addEventListener('click', opendayOpen);
+    if (opendayClose) opendayClose.addEventListener('click', opendayHide);
+    opendayOverlay.addEventListener('click', function (e) {
+      if (e.target === opendayOverlay) opendayHide();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') opendayHide();
+    });
+
+    // Apertura automatica alla prima visita di ogni sessione del browser,
+    // solo finch\u00e9 l'Open Day non \u00e8 passato.
+    var opendayAlreadySeen = false;
+    try { opendayAlreadySeen = sessionStorage.getItem('bgvOpendaySeen') === '1'; } catch (e) {}
+    if (!opendayAlreadySeen && new Date() < OPENDAY_DEADLINE) {
+      setTimeout(function () {
+        opendayOpen();
+        try { sessionStorage.setItem('bgvOpendaySeen', '1'); } catch (e) {}
+      }, 600);
+    }
+  }
+
   // Modale Lavinia
   var laviniaBtn = document.getElementById('laviniaBtn');
   var laviniaOverlay = document.getElementById('laviniaOverlay');

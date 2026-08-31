@@ -937,6 +937,84 @@ section{ padding: 72px 0; position:relative; }
 }
 .reveal.is-visible{ opacity: 1; transform: translateY(0); }
 
+/* ---------- Open Day ---------- */
+.openday-ribbon{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  background: rgba(243,146,40,.12);
+  border: 1px solid rgba(243,146,40,.45);
+  border-radius: var(--r-pill);
+  padding: 9px 12px;
+  color: var(--ambra);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.openday-ribbon:hover{ background: rgba(243,146,40,.22); border-color: var(--ambra); }
+.openday-ribbon span{
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.openday-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(10,9,8,0.78);
+  backdrop-filter: blur(6px);
+  z-index: 1001;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  padding: 24px;
+}
+.openday-overlay.is-open{ opacity: 1; pointer-events: all; }
+.openday-modal{
+  background: var(--bosco-deep);
+  border: 1px solid var(--linea-forte);
+  border-radius: var(--r-card);
+  max-width: 380px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0,0,0,.55);
+  transform: scale(0.96) translateY(10px);
+  transition: transform .3s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+}
+.openday-overlay.is-open .openday-modal{ transform: scale(1) translateY(0); }
+.openday-close{
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 30px; height: 30px;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(10,9,8,.6);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 50%;
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--crema);
+  cursor: pointer;
+  z-index: 2;
+}
+.openday-img-link{ display:block; }
+.openday-img-link img{ display:block; width: 100%; height: auto; }
+.openday-actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content:center;
+  padding: 16px 18px 18px;
+}
+.openday-actions .btn{ font-size: 12px; padding: 10px 16px; }
+
 /* ---------- fiocco Lavinia ---------- */
 .lavinia-ribbon{
   display:flex;
