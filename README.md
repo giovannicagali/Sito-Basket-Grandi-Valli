@@ -30,7 +30,6 @@ Sito statico (HTML + CSS + JS puro, nessuna build necessaria).
 │       ├── ferrari-alfro.png
 │       ├── k2.png
 │       ├── lonardi.png
-│       ├── marangoni.png
 │       ├── motterani.png
 │       ├── paradiso.png
 │       ├── perobelli-gomme.png
