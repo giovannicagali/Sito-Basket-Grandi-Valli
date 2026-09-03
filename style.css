@@ -937,28 +937,39 @@ section{ padding: 72px 0; position:relative; }
 }
 .reveal.is-visible{ opacity: 1; transform: translateY(0); }
 
-/* ---------- Open Day ---------- */
-.openday-ribbon{
+/* ---------- barra annunci (Open Day / Lavinia) ---------- */
+.topbar{
+  background: linear-gradient(90deg, rgba(243,146,40,.10), rgba(233,138,175,.08));
+  border-bottom: 1px solid var(--linea);
+}
+.topbar-row{
   display:flex;
   align-items:center;
-  gap: 8px;
-  background: rgba(243,146,40,.12);
-  border: 1px solid rgba(243,146,40,.45);
-  border-radius: var(--r-pill);
-  padding: 9px 12px;
-  color: var(--ambra);
-  cursor: pointer;
-  transition: background .15s, border-color .15s;
+  justify-content:center;
+  gap: 16px;
+  padding: 8px 40px;
+  flex-wrap: wrap;
 }
-.openday-ribbon:hover{ background: rgba(243,146,40,.22); border-color: var(--ambra); }
-.openday-ribbon span{
+.topbar-item{
+  display:flex;
+  align-items:center;
+  gap: 6px;
+  background:none;
+  border:none;
+  padding: 2px 0;
   font-family: var(--sans);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
+  transition: opacity .15s;
 }
+.topbar-item:hover{ opacity: .8; }
+.topbar-openday{ color: var(--ambra); }
+.topbar-lavinia{ color: var(--rosa); }
+.topbar-sep{ width: 1px; height: 13px; background: var(--linea-forte); flex-shrink: 0; }
 
 .openday-overlay{
   position: fixed;
@@ -1014,29 +1025,6 @@ section{ padding: 72px 0; position:relative; }
   padding: 16px 18px 18px;
 }
 .openday-actions .btn{ font-size: 12px; padding: 10px 16px; }
-
-/* ---------- fiocco Lavinia ---------- */
-.lavinia-ribbon{
-  display:flex;
-  align-items:center;
-  gap: 8px;
-  background: rgba(233,138,175,.1);
-  border: 1px solid rgba(233,138,175,.4);
-  border-radius: var(--r-pill);
-  padding: 9px 12px;
-  color: var(--rosa);
-  cursor: pointer;
-  transition: background .15s, border-color .15s;
-}
-.lavinia-ribbon:hover{ background: rgba(233,138,175,.2); border-color: var(--rosa); }
-.lavinia-ribbon span{
-  font-family: var(--sans);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
 
 .lavinia-overlay{
   position: fixed;
@@ -1158,8 +1146,8 @@ section{ padding: 72px 0; position:relative; }
   .team-card-senior .team-card-body{ padding: 20px 20px 24px; }
   .contact-card{ padding: 22px 20px; }
   .map-frame, .map-frame iframe{ min-height: 260px; }
-  .lavinia-ribbon span{ display:none; }
-  .lavinia-ribbon{ padding: 9px; }
+  .topbar-row{ padding: 7px 18px; gap: 10px; }
+  .topbar-item span{ display:none; }
 }
 
 /* ---------- Instagram: muro a due file ---------- */
