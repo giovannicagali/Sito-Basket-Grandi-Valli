@@ -937,7 +937,7 @@ section{ padding: 72px 0; position:relative; }
 }
 .reveal.is-visible{ opacity: 1; transform: translateY(0); }
 
-/* ---------- barra annunci (Open Day / Lavinia) ---------- */
+/* ---------- barra annunci (Lavinia) ---------- */
 .topbar{
   background: linear-gradient(90deg, rgba(243,146,40,.10), rgba(233,138,175,.08));
   border-bottom: 1px solid var(--linea);
@@ -967,64 +967,7 @@ section{ padding: 72px 0; position:relative; }
   transition: opacity .15s;
 }
 .topbar-item:hover{ opacity: .8; }
-.topbar-openday{ color: var(--ambra); }
 .topbar-lavinia{ color: var(--rosa); }
-.topbar-sep{ width: 1px; height: 13px; background: var(--linea-forte); flex-shrink: 0; }
-
-.openday-overlay{
-  position: fixed;
-  inset: 0;
-  background: rgba(10,9,8,0.78);
-  backdrop-filter: blur(6px);
-  z-index: 1001;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s ease;
-  padding: 24px;
-}
-.openday-overlay.is-open{ opacity: 1; pointer-events: all; }
-.openday-modal{
-  background: var(--bosco-deep);
-  border: 1px solid var(--linea-forte);
-  border-radius: var(--r-card);
-  max-width: 380px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 24px 60px rgba(0,0,0,.55);
-  transform: scale(0.96) translateY(10px);
-  transition: transform .3s cubic-bezier(0.16,1,0.3,1);
-  position: relative;
-}
-.openday-overlay.is-open .openday-modal{ transform: scale(1) translateY(0); }
-.openday-close{
-  position: absolute;
-  top: 10px; right: 10px;
-  width: 30px; height: 30px;
-  display:flex; align-items:center; justify-content:center;
-  background: rgba(10,9,8,.6);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 50%;
-  font-family: var(--sans);
-  font-size: 18px;
-  line-height: 1;
-  color: var(--crema);
-  cursor: pointer;
-  z-index: 2;
-}
-.openday-img-link{ display:block; }
-.openday-img-link img{ display:block; width: 100%; height: auto; }
-.openday-actions{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content:center;
-  padding: 16px 18px 18px;
-}
-.openday-actions .btn{ font-size: 12px; padding: 10px 16px; }
 
 .lavinia-overlay{
   position: fixed;
