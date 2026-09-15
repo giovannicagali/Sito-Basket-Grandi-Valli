@@ -127,20 +127,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Modale Lavinia
-  var laviniaBtn = document.getElementById('laviniaBtn');
-  var laviniaOverlay = document.getElementById('laviniaOverlay');
-  var laviniaClose = document.getElementById('laviniaClose');
-
-  if (laviniaBtn && laviniaOverlay) {
-    laviniaBtn.addEventListener('click', function () { laviniaOverlay.classList.add('is-open'); });
-    if (laviniaClose) laviniaClose.addEventListener('click', function () { laviniaOverlay.classList.remove('is-open'); });
-    laviniaOverlay.addEventListener('click', function (e) {
-      if (e.target === laviniaOverlay) laviniaOverlay.classList.remove('is-open');
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') laviniaOverlay.classList.remove('is-open');
-    });
-  }
-
 });
