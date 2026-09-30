@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagina non trovata (404) — Basket Grandi Valli BGV</title>
+<meta name="description" content="La pagina che cerchi non esiste o è stata spostata. Torna alla home di Basket Grandi Valli.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+  /* ---------- pagina 404 ---------- */
+  .e404{ position:relative; overflow:hidden; border-bottom:1px solid var(--linea); }
+  .e404 .hero-bg{ background-image:url('/assets/bgv-banner.png'); opacity:.18; }
+  .e404::after{ content:""; position:absolute; inset:0; z-index:0;
+    background: linear-gradient(105deg, rgba(20,17,13,.96) 0%, rgba(20,17,13,.82) 55%, rgba(20,17,13,.55) 100%); }
+  .e404 .wrap{ position:relative; z-index:1; display:grid; grid-template-columns:1.1fr .9fr; gap:56px;
+    align-items:center; padding-top:84px; padding-bottom:84px; min-height:62vh; }
+  .e404 h1{ font-size:clamp(40px,5.4vw,72px); line-height:.94; margin:0 0 20px; }
+  .e404 h1 span{ color:var(--ambra); }
+  .e404 .lead{ font-size:16.5px; color:var(--crema-dim); max-width:470px; margin:0 0 30px; }
+  .e404 .hero-ctas{ display:flex; gap:12px; flex-wrap:wrap; }
+
+  /* tabellone */
+  .scoreboard{ justify-self:center; width:min(100%,400px); background:var(--bosco-deep);
+    border:1px solid var(--linea-forte); border-radius:var(--r-card); padding:22px 24px 20px;
+    box-shadow:0 24px 60px rgba(0,0,0,.45); }
+  .sb-top{ display:flex; justify-content:space-between; font-size:11px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; color:var(--acciaio); padding-bottom:14px;
+    border-bottom:1px solid var(--linea); }
+  .sb-top b{ color:var(--ambra); font-weight:700; }
+  .sb-digits{ display:flex; align-items:center; justify-content:center; gap:6px; padding:20px 0 16px;
+    font-family:var(--display); font-size:clamp(96px,13vw,150px); line-height:1; color:var(--ambra);
+    text-shadow:0 0 28px rgba(243,146,40,.35); }
+  .sb-ball{ width:.74em; height:.74em; display:block; animation:e404-bounce 1.6s cubic-bezier(.3,0,.4,1) infinite; }
+  .sb-ball svg{ width:100%; height:100%; display:block; filter:drop-shadow(0 6px 10px rgba(0,0,0,.5)); }
+  @keyframes e404-bounce{
+    0%,100%{ transform:translateY(-14%); }
+    45%{ transform:translateY(8%) scale(1.04,.94); }
+    55%{ transform:translateY(6%); }
+  }
+  .sb-bottom{ display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--linea); padding-top:14px; text-align:center; }
+  .sb-bottom div + div{ border-left:1px solid var(--linea); }
+  .sb-bottom small{ display:block; font-size:10px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--acciaio); }
+  .sb-bottom strong{ display:block; font-family:var(--display); font-weight:400; font-size:26px; color:var(--crema); letter-spacing:1px; font-variant-numeric:tabular-nums; }
+  .sb-bottom strong.is-zero{ color:var(--mattone); }
+
+  /* scorciatoie */
+  .e404-links{ padding:56px 0 64px; }
+  .e404-links h2{ font-size:clamp(26px,3vw,34px); margin:0 0 24px; }
+  .e404-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .e404-card{ display:block; padding:22px 22px 20px; border:1px solid var(--linea); border-radius:var(--r-card);
+    background:rgba(255,255,255,.02); color:var(--crema); transition:border-color .15s, transform .15s, background .15s; }
+  .e404-card:hover{ border-color:var(--ambra); background:rgba(243,146,40,.05); color:var(--crema); transform:translateY(-2px); }
+  .e404-card span{ display:block; font-size:10.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--ambra); margin-bottom:8px; }
+  .e404-card strong{ display:block; font-family:var(--display); font-weight:400; font-size:22px; text-transform:uppercase; letter-spacing:.5px; line-height:1.1; }
+  .e404-card p{ margin:8px 0 0; font-size:14px; color:var(--crema-dim); line-height:1.5; }
+
+  @media (max-width:980px){
+    .e404 .wrap{ grid-template-columns:1fr; gap:40px; padding-top:56px; padding-bottom:56px; min-height:0; }
+    .scoreboard{ justify-self:start; }
+    .e404-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:620px){
+    .e404-grid{ grid-template-columns:1fr; }
+    .scoreboard{ justify-self:stretch; width:100%; }
+  }
+  @media (prefers-reduced-motion: reduce){ .sb-ball{ animation:none; } }
+</style>
+</head>
+<body>
+<div class="court-texture" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="brand">
+      <img src="/assets/logo-bgv.png" alt="Logo Basket Grandi Valli" class="brand-mark">
+      <span class="brand-text">Basket Grandi Valli<span>Gazzo Veronese &middot; dal 1996</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/squadre">Squadre</a></li>
+        <li><a href="/novita">Novit&agrave;</a></li>
+        <li><a href="/risultati">Calendario &amp; Risultati</a></li>
+        <li><a href="/sponsor">Sponsor</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Apri il menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="btn btn-primary header-cta" href="/contatti">Contattaci</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="e404">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Errore 404 &middot; Palla persa</span>
+        <h1>Tiro fuori <span>bersaglio</span></h1>
+        <p class="lead">La pagina che cerchi non esiste, &egrave; stata spostata o il link &egrave; sbagliato. Nessun problema: rimettiamo la palla in gioco e ripartiamo dal campo.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="/">Torna alla home</a>
+          <a class="btn btn-outline" href="/contatti">Segnala il problema</a>
+        </div>
+      </div>
+
+      <div class="scoreboard" role="img" aria-label="Tabellone con scritto 404, pagina non trovata">
+        <div class="sb-top"><span><b>BGV</b> vs Pagina</span><span>Time-out</span></div>
+        <div class="sb-digits" aria-hidden="true">
+          <span>4</span>
+          <span class="sb-ball">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs><radialGradient id="ballg" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#FFB35C"/><stop offset=".55" stop-color="#F39228"/><stop offset="1" stop-color="#B8400F"/></radialGradient></defs>
+              <circle cx="50" cy="50" r="47" fill="url(#ballg)"/>
+              <g fill="none" stroke="#14110D" stroke-width="3.2" stroke-linecap="round">
+                <circle cx="50" cy="50" r="47"/>
+                <path d="M3 50h94"/><path d="M50 3v94"/>
+                <path d="M16 17c14 12 14 54 0 66"/><path d="M84 17c-14 12-14 54 0 66"/>
+              </g>
+            </svg>
+          </span>
+          <span>4</span>
+        </div>
+        <div class="sb-bottom" aria-hidden="true">
+          <div><small>Periodo</small><strong>4</strong></div>
+          <div><small>Tempo</small><strong class="is-zero">00:00</strong></div>
+          <div><small>24&Prime;</small><strong id="shotClock">24</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="e404-links">
+    <div class="wrap">
+      <span class="eyebrow">Rimettiamo la palla in gioco</span>
+      <h2>Dove vuoi andare?</h2>
+      <div class="e404-grid">
+        <a class="e404-card" href="/squadre"><span>Roster</span><strong>Squadre</strong><p>Dal minibasket alla CSI A2: allenatori e gruppi.</p></a>
+        <a class="e404-card" href="/novita"><span>News</span><strong>Novit&agrave;</strong><p>Le ultime notizie dalla societ&agrave;.</p></a>
+        <a class="e404-card" href="/risultati"><span>Partite</span><strong>Calendario &amp; Risultati</strong><p>Prossime gare e punteggi della stagione.</p></a>
+        <a class="e404-card" href="/sponsor"><span>Partner</span><strong>Sponsor</strong><p>Chi sostiene il Basket Grandi Valli.</p></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-top">
+    <div>
+      <div class="footer-brand">
+        <img src="/assets/logo-bgv.png" alt="">
+        <span>Basket Grandi Valli</span>
+      </div>
+      <p class="footer-about">Societ&agrave; di pallacanestro di Gazzo Veronese (VR). Trent'anni di sport sul territorio.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Sezioni</h4>
+      <div class="footer-links">
+        <a href="/squadre">Squadre</a>
+        <a href="/novita">Novit&agrave;</a>
+        <a href="/risultati">Calendario e risultati</a>
+        <a href="/sponsor">Sponsor</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Contatti</h4>
+      <div class="footer-links">
+        <a class="footer-ig" href="https://instagram.com/basketgrandivalli" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>@basketgrandivalli</a>
+        <a href="/contatti">Scrivici</a>
+        <span>Gazzo Veronese (VR)</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <p class="footer-note">&copy; <span id="year"></span> Basket Grandi Valli (BGV) &mdash; Gazzo Veronese, VR. Dal 1996.</p>
+    </div>
+  </div>
+</footer>
+<script src="/script.js"></script>
+<script>
+  // Cronometro dei 24" decorativo: scende a 0 una volta sola
+  (function () {
+    var el = document.getElementById('shotClock');
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { if (el) { el.textContent = '0'; el.classList.add('is-zero'); } return; }
+    var t = 24;
+    var id = setInterval(function () {
+      t--; el.textContent = t;
+      if (t <= 0) { clearInterval(id); el.classList.add('is-zero'); }
+    }, 1000);
+  })();
+</script>
+</body>
+</html>
