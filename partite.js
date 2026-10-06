@@ -43,7 +43,7 @@ window.BGV_SQUADRE = {
 };
 
 window.BGV_PARTITE = [
-  { tipo: 'Fuori campionato', data: '2026-10-09', ora: '21:00', casa: 'bgv',        ospite: 'cowboys' },
+  { tipo: 'Coppa CSI Verona', data: '2026-10-09', ora: '21:00', casa: 'bgv',        ospite: 'cowboys' },
 
   { giornata: 1,  data: '2026-10-16', ora: '21:00', casa: 'bgv',        ospite: 'mantova' },
   { giornata: 2,  data: '2026-10-23', riposo: true },

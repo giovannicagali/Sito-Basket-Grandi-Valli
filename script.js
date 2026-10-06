@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   function finita(m, ora) { return ora.getTime() > inizio(m).getTime() + DURATA_MIN * 60000; }
   function etichetta(m) { return m.giornata ? m.giornata + '\u00aa giornata' : (m.tipo || 'Partita'); }
+  function competizione(m) { return m.giornata ? 'CSI A2 \u00b7 ' + etichetta(m) : etichetta(m); }
   function inCasa(m) { return m.casa === 'bgv'; }
   function avversario(m) { return SQUADRE[inCasa(m) ? m.ospite : m.casa]; }
 
@@ -166,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
       '&text=' + encodeURIComponent(SQUADRE[m.casa].nome + ' vs ' + SQUADRE[m.ospite].nome) +
       '&dates=' + f(a) + '/' + f(b) + '&ctz=Europe/Rome' +
-      '&details=' + encodeURIComponent('CSI A2 \u00b7 ' + etichetta(m) + ' \u00b7 Basket Grandi Valli') +
+      '&details=' + encodeURIComponent(competizione(m) + ' \u00b7 Basket Grandi Valli') +
       '&location=' + encodeURIComponent((p.nome || '') + ', ' + (p.indirizzo || ''));
   }
   function mappa(p) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.nome + ', ' + p.indirizzo); }
@@ -266,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return {
         '@context': 'https://schema.org', '@type': 'SportsEvent',
         name: SQUADRE[m.casa].nome + ' vs ' + SQUADRE[m.ospite].nome,
-        description: 'CSI A2 \u2014 ' + etichetta(m), sport: 'Basketball',
+        description: competizione(m), sport: 'Basketball',
         startDate: m.data + 'T' + m.ora + ':00' + sign + pad(Math.floor(off / 60)) + ':' + pad(off % 60),
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
