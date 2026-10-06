@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function gcal(m) {
     var a = inizio(m), b = new Date(a.getTime() + 90 * 60000);
     var f = function (d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00'; };
-    var p = PALESTRE[m.palestra] || {};
+    var p = palestra(m);
     return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
       '&text=' + encodeURIComponent(SQUADRE[m.casa].nome + ' vs ' + SQUADRE[m.ospite].nome) +
       '&dates=' + f(a) + '/' + f(b) + '&ctz=Europe/Rome' +
@@ -170,6 +170,11 @@ document.addEventListener('DOMContentLoaded', function () {
       '&location=' + encodeURIComponent((p.nome || '') + ', ' + (p.indirizzo || ''));
   }
   function mappa(p) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.nome + ', ' + p.indirizzo); }
+
+  function palestra(m) {
+    var k = m.palestra || (SQUADRE[m.casa] || {}).palestra;
+    return (PALESTRE && PALESTRE[k]) || { nome: '?', indirizzo: '', luogo: '?' };
+  }
 
   var adesso = new Date();
   var prossima = null;
@@ -182,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (nm) {
     var w = nm.querySelector('.wrap');
     if (prossima) {
-      var d = inizio(prossima), p = PALESTRE[prossima.palestra] || { nome: '?' };
+      var d = inizio(prossima), p = palestra(prossima);
       nm.classList.add('is-set');
       w.innerHTML =
         '<span class="next-match-label">Prossima partita</span>' +
@@ -218,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
       var giocata = finita(m, adesso), isNext = m === prossima;
-      var p = PALESTRE[m.palestra] || { nome: '?', indirizzo: '' };
+      var p = palestra(m);
       var cls = 'cal-match' + (isNext ? ' is-next' : '') + (giocata ? ' is-played' : '');
       var tags = '<span class="cal-match-tag">' + etichetta(m) + '</span>' +
         '<span class="cal-match-tag' + (inCasa(m) ? ' is-home' : '') + '">' + (inCasa(m) ? 'In casa' : 'Trasferta') + '</span>' +
@@ -255,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // dati strutturati per Google (SportsEvent)
     var eventi = PARTITE.filter(function (m) { return !m.riposo; }).map(function (m) {
-      var p = PALESTRE[m.palestra] || {}, d = inizio(m);
+      var p = palestra(m), d = inizio(m);
       var off = -d.getTimezoneOffset(), sign = off >= 0 ? '+' : '-';
       off = Math.abs(off);
       return {
