@@ -58,7 +58,7 @@
     <div class="wrap">
       <span class="eyebrow">Stagione 2026/2027</span>
       <h1>Calendario e risultati</h1>
-      <p class="lead">Calendario partite e risultati di tutte le nostre squadre.</p>
+      <p class="lead">Calendario, classifica e risultati della prima squadra nel campionato CSI A2, girone Blu.</p>
     </div>
   </div>
 
@@ -75,6 +75,22 @@
           <div class="cal-list" id="calList">
             <noscript><div class="cal-empty"><p>Attiva JavaScript per vedere il calendario completo.</p></div></noscript>
           </div>
+        </div>
+        <div class="cal-block" id="classifica">
+          <div class="cal-block-header">
+            <span class="cal-block-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 20h16"/><rect x="5" y="11" width="4" height="9"/><rect x="10" y="6" width="4" height="14"/><rect x="15" y="14" width="4" height="6"/></svg></span>
+            <h2>Classifica</h2>
+            <span class="cal-coming-soon">Girone Blu</span>
+          </div>
+          <div class="standings-wrap">
+            <table class="standings">
+              <thead>
+                <tr><th class="st-pos" scope="col">#</th><th class="st-team" scope="col">Squadra</th><th scope="col" title="Punti">PT</th><th scope="col" title="Partite giocate">G</th><th scope="col" title="Vinte">V</th><th scope="col" title="Perse">P</th><th class="st-opt" scope="col" title="Punti fatti">PF</th><th class="st-opt" scope="col" title="Punti subiti">PS</th><th scope="col" title="Differenza canestri">DIFF</th></tr>
+              </thead>
+              <tbody id="standingsBody"></tbody>
+            </table>
+          </div>
+          <p class="standings-note" id="standingsNote"></p>
         </div>
         <div class="cal-block">
           <div class="cal-block-header">

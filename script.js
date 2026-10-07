@@ -57,73 +57,89 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  // Instagram — muro a due file alimentato dal widget esterno.
-  // Incolla qui l'indirizzo del feed (es. Behold: https://feeds.behold.so/XXXXXXXX)
+  // Instagram — novità in home: tutti i post del feed, dal più recente, a scorrimento.
+  // Indirizzo del feed JSON (Behold: https://feeds.behold.so/XXXXXXXX)
   var IG_FEED_URL = 'https://feeds.behold.so/WPlVGJehRqXpt8NA4iar';
-  var IG_POSTS = 10; // post mostrati (5 per fila)
+  var IG_PROFILE = 'https://instagram.com/basketgrandivalli';
 
-  var igRows = document.getElementById('igRows');
-  var igWall = document.getElementById('igWall');
+  var igMarquee = document.getElementById('igMarquee');
+  var igTrack = document.getElementById('igTrack');
 
-  if (igRows && igWall) {
-    var rowA = document.getElementById('igRowA');
-    var rowB = document.getElementById('igRowB');
+  if (igMarquee && igTrack) {
+    var MESI_IG = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic'];
+    var lentezza = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function igSkeletons() {
-      [rowA, rowB].forEach(function (row) {
-        row.innerHTML = '';
-        for (var i = 0; i < 6; i++) {
-          var s = document.createElement('span');
-          s.className = 'ig-skel';
-          s.style.animationDelay = (i * 0.15) + 's';
-          row.appendChild(s);
-        }
-      });
+    function igData(ts) {
+      var d = new Date(ts);
+      if (isNaN(d)) return '';
+      var s = d.getDate() + ' ' + MESI_IG[d.getMonth()];
+      return d.getFullYear() !== new Date().getFullYear() ? s + ' ' + d.getFullYear() : s;
     }
-
-    function igFallback() {
-      igRows.setAttribute('data-state', 'empty');
-      igWall.setAttribute('data-fallback', 'true');
+    function igImg(post) {
+      var sz = post.sizes || {};
+      return (sz.medium && sz.medium.mediaUrl) || (sz.large && sz.large.mediaUrl) ||
+        post.thumbnailUrl || post.mediaUrl || post.media_url || '';
     }
-
-    function igTile(post) {
+    function igTipo(post) {
+      var t = (post.mediaType || post.media_type || '').toUpperCase();
+      if (t === 'VIDEO') return '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+      if (t === 'CAROUSEL_ALBUM') return '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>';
+      return '';
+    }
+    function igTile(post, clone) {
       var a = document.createElement('a');
-      a.className = 'ig-tile';
-      a.href = post.permalink || 'https://instagram.com/basketgrandivalli';
+      a.className = 'ig-post';
+      a.href = post.permalink || IG_PROFILE;
       a.target = '_blank';
       a.rel = 'noopener';
+      if (clone) { a.tabIndex = -1; a.setAttribute('aria-hidden', 'true'); }
+      var testo = (post.prunedCaption || post.caption || '').replace(/\s+/g, ' ').trim();
       var img = document.createElement('img');
-      img.src = post.thumbnailUrl || post.mediaUrl || post.media_url || '';
-      img.alt = (post.prunedCaption || post.caption || 'Post Instagram di Basket Grandi Valli').slice(0, 110);
+      img.src = igImg(post);
+      img.alt = testo ? testo.slice(0, 110) : 'Post Instagram di Basket Grandi Valli';
       img.loading = 'lazy';
       a.appendChild(img);
+      var tipo = igTipo(post);
+      if (tipo) { var t = document.createElement('span'); t.className = 'ig-post-type'; t.innerHTML = tipo; a.appendChild(t); }
+      var meta = document.createElement('span');
+      meta.className = 'ig-post-meta';
+      var data = igData(post.timestamp);
+      if (data) { var tm = document.createElement('time'); tm.dateTime = post.timestamp; tm.textContent = data; meta.appendChild(tm); }
+      if (testo) { var c = document.createElement('span'); c.className = 'ig-post-cap'; c.textContent = testo; meta.appendChild(c); }
+      a.appendChild(meta);
       return a;
     }
+    function igVuoto() { igMarquee.setAttribute('data-state', 'empty'); }
 
     function igRender(posts) {
-      if (!posts || !posts.length) { igFallback(); return; }
-      var list = posts.slice(0, IG_POSTS);
-      var half = Math.ceil(list.length / 2);
-      var sets = [list.slice(0, half), list.slice(half).length ? list.slice(half) : list.slice(0, half)];
+      posts = (posts || []).filter(function (p) { return igImg(p); });
+      if (!posts.length) { igVuoto(); return; }
+      // dal più recente al più vecchio
+      posts.sort(function (a, b) { return new Date(b.timestamp) - new Date(a.timestamp); });
+      igTrack.innerHTML = '';
+      posts.forEach(function (p) { igTrack.appendChild(igTile(p, false)); });
 
-      [rowA, rowB].forEach(function (row, idx) {
-        row.innerHTML = '';
-        // doppia sequenza: serve per far ripartire lo scorrimento senza stacchi
-        sets[idx].concat(sets[idx]).forEach(function (post) {
-          row.appendChild(igTile(post));
-        });
-      });
-      igRows.setAttribute('data-state', 'ready');
+      if (!lentezza) {
+        // ripete la sequenza finché copre lo schermo, poi la duplica per un loop senza stacchi
+        var giro = posts.slice();
+        var larghezza = 286; // larghezza tile + gap (desktop)
+        while (giro.length * larghezza < window.innerWidth * 1.15) giro = giro.concat(posts);
+        giro.slice(posts.length).forEach(function (p) { igTrack.appendChild(igTile(p, true)); });
+        giro.forEach(function (p) { igTrack.appendChild(igTile(p, true)); });
+        igTrack.style.setProperty('--ig-durata', Math.max(30, giro.length * 6) + 's');
+        igMarquee.setAttribute('data-anim', 'true');
+      }
+      igMarquee.setAttribute('data-state', 'ready');
     }
 
     if (!IG_FEED_URL) {
-      igFallback();
+      igVuoto();
     } else {
-      igSkeletons();
+      for (var k = 0; k < 6; k++) { var sk = document.createElement('span'); sk.className = 'ig-skel'; igTrack.appendChild(sk); }
       fetch(IG_FEED_URL)
         .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
         .then(function (data) { igRender(Array.isArray(data) ? data : (data.posts || [])); })
-        .catch(igFallback);
+        .catch(igVuoto);
     }
   }
 
@@ -285,6 +301,43 @@ document.addEventListener('DOMContentLoaded', function () {
     var nx = list.querySelector('.is-next');
     if (nx && list.querySelectorAll('.is-played').length > 2) {
       window.scrollTo({ top: nx.getBoundingClientRect().top + window.scrollY - 120 });
+    }
+  }
+
+  // ---------- classifica ----------
+  var stBody = document.getElementById('standingsBody');
+  var CL = window.BGV_CLASSIFICA;
+  if (stBody && CL && CL.squadre) {
+    var righe = CL.squadre.map(function (r) {
+      var o = {}; for (var k in r) o[k] = r[k];
+      o.diff = (r.pf || 0) - (r.ps || 0);
+      o.nome = (SQUADRE[r.squadra] || { nome: r.squadra }).nome;
+      return o;
+    });
+    var iniziata = righe.some(function (r) { return r.g > 0; });
+    righe.sort(function (a, b) {
+      if (!iniziata) return a.nome.localeCompare(b.nome, 'it');
+      return (b.pt - a.pt) || (b.diff - a.diff) || (b.pf - a.pf) || a.nome.localeCompare(b.nome, 'it');
+    });
+    stBody.innerHTML = righe.map(function (r, i) {
+      var diff = r.diff > 0 ? '+' + r.diff : String(r.diff);
+      return '<tr' + (r.squadra === 'bgv' ? ' class="is-us"' : '') + '>' +
+        '<td class="st-pos">' + (iniziata ? i + 1 : '&ndash;') + '</td>' +
+        '<td class="st-team"><span class="st-team-in">' + logo(r.squadra, 32) + '<span>' + r.nome + '</span></span></td>' +
+        '<td class="st-pt">' + r.pt + '</td><td>' + r.g + '</td><td>' + r.v + '</td><td>' + r.p + '</td>' +
+        '<td class="st-opt">' + r.pf + '</td><td class="st-opt">' + r.ps + '</td>' +
+        '<td class="st-diff' + (r.diff > 0 ? ' is-pos' : (r.diff < 0 ? ' is-neg' : '')) + '">' + diff + '</td></tr>';
+    }).join('');
+    var nota = document.getElementById('standingsNote');
+    if (nota) {
+      if (CL.aggiornata) {
+        var d = CL.aggiornata.split('-');
+        nota.textContent = 'Aggiornata al ' + d[2] + '/' + d[1] + '/' + d[0] + '.';
+      } else {
+        var prima = PARTITE.filter(function (m) { return m.giornata === 1; })[0];
+        nota.textContent = 'Il campionato non \u00e8 ancora iniziato' +
+          (prima ? ': la classifica si aggiorna dopo la 1\u00aa giornata (' + prima.data.split('-').reverse().join('/') + ').' : '.');
+      }
     }
   }
 })();

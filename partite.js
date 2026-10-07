@@ -10,6 +10,8 @@
      in BGV_SQUADRE). Per una partita giocata altrove aggiungi
      palestra: 'chiave' alla singola partita.
    - Date AAAA-MM-GG, ora HH:MM (ora italiana)
+   - Classifica: in fondo al file (BGV_CLASSIFICA). Copia i valori ufficiali
+     CSI dopo ogni giornata e aggiorna la data in "aggiornata".
    ========================================================================== */
 
 window.BGV_PALESTRE = {
@@ -45,7 +47,7 @@ window.BGV_SQUADRE = {
 window.BGV_PARTITE = [
   { tipo: 'Coppa CSI Verona', data: '2026-10-09', ora: '21:00', casa: 'bgv',        ospite: 'cowboys' },
 
-  { giornata: 1,  data: '2026-10-15', ora: '21:00', casa: 'bgv',        ospite: 'mantova' },
+  { giornata: 1,  data: '2026-10-16', ora: '21:00', casa: 'bgv',        ospite: 'mantova' },
   { giornata: 2,  data: '2026-10-23', riposo: true },
   { giornata: 3,  data: '2026-10-29', ora: '21:15', casa: 'ostiglia',   ospite: 'bgv' },
   { giornata: 4,  data: '2026-11-06', ora: '21:00', casa: 'bgv',        ospite: 'campagnola' },
@@ -57,3 +59,25 @@ window.BGV_PARTITE = [
   { giornata: 10, data: '2027-01-15', ora: '21:00', casa: 'bgv',        ospite: 'sanantonio' },
   { giornata: 11, data: '2027-01-22', ora: '21:30', casa: 'vigasio',    ospite: 'bgv' }
 ];
+
+/* --------------------------------------------------------------------------
+   CLASSIFICA — CSI A2 girone Blu
+   pt = punti, g = giocate, v = vinte, p = perse, pf = punti fatti, ps = punti subiti
+   L'ordine si calcola da solo (punti, poi differenza canestri).
+   -------------------------------------------------------------------------- */
+window.BGV_CLASSIFICA = {
+  aggiornata: '',   // es. '2026-10-17' — lascia vuoto finché non si gioca
+  squadre: [
+    { squadra: 'bgv',         pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'mantova',     pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'ostiglia',    pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'campagnola',  pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'cerea',       pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'greengiants', pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'zevio',       pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'pgsamba',     pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'oppeano',     pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'sanantonio',  pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 },
+    { squadra: 'vigasio',     pt: 0, g: 0, v: 0, p: 0, pf: 0, ps: 0 }
+  ]
+};

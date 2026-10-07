@@ -93,54 +93,26 @@
     </div>
   </div>
 
-  <!-- ANTEPRIMA NOVITÀ -->
-  <section>
+  <!-- NOVITÀ DA INSTAGRAM (post dal più recente, a scorrimento) -->
+  <section class="ig-feed" id="igFeed" aria-labelledby="igFeedTitle">
     <div class="wrap">
       <div class="section-head-row">
         <div class="section-head">
-          <span class="eyebrow">Dal club</span>
-          <h2>Ultime novit&agrave;</h2>
+          <span class="eyebrow">Novit&agrave; dal club</span>
+          <h2 id="igFeedTitle">Ultime da Instagram</h2>
         </div>
-        <a href="/novita" class="btn btn-outline btn-sm">Tutte le novit&agrave;</a>
-      </div>
-      <div class="preview-grid">
-        <a href="/novita" class="preview-card reveal">
-          <div class="preview-img">
-            <img src="assets/novita/trevisani-2026.jpg" alt="Coach Michele Trevisani, nuovo allenatore della prima squadra CSI A2" loading="lazy">
-            <span class="preview-tag">Nuovo coach</span>
-          </div>
-          <div class="preview-body">
-            <span class="preview-date">Settembre 2026</span>
-            <h3>Benvenuto Coach Michele Trevisani!</h3>
-            <p>BGV annuncia l'arrivo di Michele Trevisani, unico allenatore della prima squadra CSI A2 per la stagione 2026/2027.</p>
-            <span class="preview-cta">Leggi tutto &rarr;</span>
-          </div>
-        </a>
-        <a href="/novita" class="preview-card reveal">
-          <div class="preview-img">
-            <img src="assets/novita/grigoli-2026.jpg" alt="Gianmarco Grigoli #24 nuovo acquisto BGV" loading="lazy">
-            <span class="preview-tag">Nuovo acquisto</span>
-          </div>
-          <div class="preview-body">
-            <span class="preview-date">Settembre 2026</span>
-            <h3>Benvenuto Gianmarco Grigoli!</h3>
-            <p>BGV annuncia l'ingaggio di Gianmarco Grigoli #24 per la stagione 2026/2027.</p>
-            <span class="preview-cta">Leggi tutto &rarr;</span>
-          </div>
-        </a>
-        <a href="/novita" class="preview-card reveal">
-          <div class="preview-img">
-            <img src="assets/novita/tardiani-2026.jpg" alt="Marco Tardiani #10 nuovo acquisto BGV" loading="lazy">
-            <span class="preview-tag">Nuovo acquisto</span>
-          </div>
-          <div class="preview-body">
-            <span class="preview-date">Settembre 2026</span>
-            <h3>Benvenuto Marco Tardiani!</h3>
-            <p>BGV annuncia l'ingaggio di Marco Tardiani #10 per la stagione 2026/2027.</p>
-            <span class="preview-cta">Leggi tutto &rarr;</span>
-          </div>
+        <a class="btn btn-outline btn-sm ig-follow" href="https://instagram.com/basketgrandivalli" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @basketgrandivalli
         </a>
       </div>
+    </div>
+    <div class="ig-marquee" id="igMarquee" data-state="loading">
+      <div class="ig-track" id="igTrack"></div>
+    </div>
+    <div class="wrap ig-empty">
+      <p>Foto, risultati e vita di squadra: segui tutte le novit&agrave; sul nostro profilo Instagram.</p>
+      <a class="btn btn-primary" href="https://instagram.com/basketgrandivalli" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> Apri Instagram</a>
     </div>
   </section>
 
@@ -168,24 +140,6 @@
           <span class="team-tile-label"><span>Prima squadra</span><strong>CSI A2</strong></span>
         </a>
       </div>
-    </div>
-  </section>
-
-  <!-- INSTAGRAM (muro a due file, alimentato dal widget) -->
-  <section class="ig-wall" id="igWall" aria-labelledby="igTitle">
-    <div class="ig-rows" id="igRows" data-state="loading" aria-hidden="true">
-      <div class="ig-row" id="igRowA"></div>
-      <div class="ig-row ig-row-rev" id="igRowB"></div>
-    </div>
-    <div class="ig-veil" aria-hidden="true"></div>
-    <div class="ig-content">
-      <span class="eyebrow eyebrow-center">Seguici su Instagram</span>
-      <h2 id="igTitle">@basketgrandivalli</h2>
-      <p>Foto, risultati e vita di squadra, ogni settimana dal nostro profilo.</p>
-      <a class="btn btn-primary" href="https://instagram.com/basketgrandivalli" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        Seguici
-      </a>
     </div>
   </section>
 
