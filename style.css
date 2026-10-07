@@ -713,6 +713,8 @@ section{ padding: 72px 0; position:relative; }
   text-align: center;
 }
 .roster-name{ font-size: 15px; font-weight: 600; color: var(--crema); }
+.roster-cap{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; margin-left:6px; vertical-align:2px;
+  border-radius:50%; background: var(--ambra); color: var(--bosco); font-size:10px; font-weight:800; line-height:1; }
 .roster-list li.is-empty{ background: rgba(255,255,255,0.02); }
 .roster-list li.is-empty .roster-num, .roster-list li.is-empty .roster-name{ color: var(--acciaio-dim); }
 .roster-note{
