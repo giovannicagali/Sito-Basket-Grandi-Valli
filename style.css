@@ -1215,3 +1215,19 @@ section{ padding: 72px 0; position:relative; }
   .standings th, .standings td{ padding:9px 6px; }
   .st-team-in{ gap:8px; font-size:13px; white-space:normal; }
 }
+
+/* ---------- Pagina Novità: griglia Instagram ---------- */
+.ig-page-head{ margin-bottom: 28px; }
+.ig-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap:16px; }
+.ig-grid .ig-post, .ig-grid .ig-skel{ width:auto; }
+.ig-grid[data-state="empty"]{ display:none; }
+.ig-grid[data-state="empty"] + .ig-grid-empty{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  padding:28px; border:1px dashed rgba(255,255,255,.16); border-radius: var(--r-card); }
+.ig-grid-more{ display:flex; justify-content:center; margin-top:32px; }
+.ig-grid[data-state="empty"] ~ .ig-grid-more{ display:none; }
+@media (max-width: 620px){
+  .ig-page-head{ flex-direction:column; align-items:flex-start; gap:16px; }
+  .ig-grid{ grid-template-columns: 1fr 1fr; gap:10px; }
+  .ig-grid .ig-post-cap{ display:none; }
+  .ig-grid .ig-post-meta{ padding:30px 10px 10px; }
+}

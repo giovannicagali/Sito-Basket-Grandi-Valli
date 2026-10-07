@@ -64,8 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var igMarquee = document.getElementById('igMarquee');
   var igTrack = document.getElementById('igTrack');
+  var igGrid = document.getElementById('igGrid'); // pagina Novità
 
-  if (igMarquee && igTrack) {
+  if ((igMarquee && igTrack) || igGrid) {
     var MESI_IG = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic'];
     var lentezza = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -109,13 +110,25 @@ document.addEventListener('DOMContentLoaded', function () {
       a.appendChild(meta);
       return a;
     }
-    function igVuoto() { igMarquee.setAttribute('data-state', 'empty'); }
+    function igVuoto() {
+      if (igMarquee) igMarquee.setAttribute('data-state', 'empty');
+      if (igGrid) igGrid.setAttribute('data-state', 'empty');
+    }
 
     function igRender(posts) {
       posts = (posts || []).filter(function (p) { return igImg(p); });
       if (!posts.length) { igVuoto(); return; }
       // dal più recente al più vecchio
       posts.sort(function (a, b) { return new Date(b.timestamp) - new Date(a.timestamp); });
+
+      // pagina Novità: griglia con tutti i post
+      if (igGrid) {
+        igGrid.innerHTML = '';
+        posts.forEach(function (p) { igGrid.appendChild(igTile(p, false)); });
+        igGrid.setAttribute('data-state', 'ready');
+      }
+      if (!igMarquee || !igTrack) return;
+
       igTrack.innerHTML = '';
       posts.forEach(function (p) { igTrack.appendChild(igTile(p, false)); });
 
@@ -135,7 +148,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!IG_FEED_URL) {
       igVuoto();
     } else {
-      for (var k = 0; k < 6; k++) { var sk = document.createElement('span'); sk.className = 'ig-skel'; igTrack.appendChild(sk); }
+      [igTrack, igGrid].forEach(function (box) {
+        if (!box) return;
+        for (var k = 0; k < 6; k++) { var sk = document.createElement('span'); sk.className = 'ig-skel'; box.appendChild(sk); }
+      });
       fetch(IG_FEED_URL)
         .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
         .then(function (data) { igRender(Array.isArray(data) ? data : (data.posts || [])); })
