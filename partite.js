@@ -34,11 +34,11 @@ window.BGV_SQUADRE = {
   cowboys:    { nome: 'Cadidavid Cowboys',        logo: '/assets/loghi/cadidavid-cowboys.jpg', palestra: 'bovolino' },
   mantova:    { nome: 'Mantova Giants',           logo: '/assets/loghi/mantova-giants.jpg',    palestra: 'mantova' },
   ostiglia:   { nome: 'Basket Ostiglia',          logo: '/assets/loghi/ostiglia.jpg',          palestra: 'ostiglia' },
-  campagnola: { nome: 'Campagnola Beers Brother', logo: '/assets/loghi/campagnola.jpg',                                  palestra: 'campagnola' },
+  campagnola: { nome: 'Campagnola Beers Brother', logo: '/assets/loghi/campagnola.jpg',          palestra: 'campagnola' },
   cerea:      { nome: 'Cerea Basket',             logo: '/assets/loghi/cerea.jpg',             palestra: 'cerea' },
-  greengiants:{ nome: 'Green Giants Usacli',      logo: '/assets/loghi/usacli.jpg',                                  palestra: 'marconi' },
+  greengiants:{ nome: 'Green Giants Usacli',      logo: '/assets/loghi/green-giants-usacli.jpg', palestra: 'marconi' },
   zevio:      { nome: 'Zevio',                    logo: '/assets/loghi/zevio.jpg',             palestra: 'zevio' },
-  pgsamba:    { nome: 'Pgsamba',                  logo: '/assets/loghi/pgs.jpg',                                  palestra: 'fincato' },
+  pgsamba:    { nome: 'Pgsamba',                  logo: '/assets/loghi/pgsamba.jpg',           palestra: 'fincato' },
   oppeano:    { nome: 'Pol. Oppeano',             logo: '/assets/loghi/oppeano.jpg',           palestra: 'oppeano' },
   sanantonio: { nome: 'San Antonio',              logo: '/assets/loghi/san-antonio.jpg',       palestra: 'monteforte' },
   vigasio:    { nome: 'Vigasio Vipers',           logo: '/assets/loghi/vigasio-vipers.png',    palestra: 'isola' }
@@ -47,7 +47,7 @@ window.BGV_SQUADRE = {
 window.BGV_PARTITE = [
   { tipo: 'Coppa CSI Verona', data: '2026-10-09', ora: '21:00', casa: 'bgv',        ospite: 'cowboys', risultato: [70, 65] },
 
-  { giornata: 1,  data: '2026-10-15', ora: '21:00', casa: 'bgv',        ospite: 'mantova', risultato: [59, 57] },
+  { giornata: 1,  data: '2026-10-16', ora: '21:00', casa: 'bgv',        ospite: 'mantova' },
   { giornata: 2,  data: '2026-10-23', riposo: true },
   { giornata: 3,  data: '2026-10-29', ora: '21:15', casa: 'ostiglia',   ospite: 'bgv' },
   { giornata: 4,  data: '2026-11-06', ora: '21:00', casa: 'bgv',        ospite: 'campagnola' },
