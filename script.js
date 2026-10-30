@@ -320,40 +320,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // ---------- classifica ----------
-  var stBody = document.getElementById('standingsBody');
-  var CL = window.BGV_CLASSIFICA;
-  if (stBody && CL && CL.squadre) {
-    var righe = CL.squadre.map(function (r) {
-      var o = {}; for (var k in r) o[k] = r[k];
-      o.diff = (r.pf || 0) - (r.ps || 0);
-      o.nome = (SQUADRE[r.squadra] || { nome: r.squadra }).nome;
-      return o;
-    });
-    var iniziata = righe.some(function (r) { return r.g > 0; });
-    righe.sort(function (a, b) {
-      if (!iniziata) return a.nome.localeCompare(b.nome, 'it');
-      return (b.pt - a.pt) || (b.diff - a.diff) || (b.pf - a.pf) || a.nome.localeCompare(b.nome, 'it');
-    });
-    stBody.innerHTML = righe.map(function (r, i) {
-      var diff = r.diff > 0 ? '+' + r.diff : String(r.diff);
-      return '<tr' + (r.squadra === 'bgv' ? ' class="is-us"' : '') + '>' +
-        '<td class="st-pos">' + (iniziata ? i + 1 : '&ndash;') + '</td>' +
-        '<td class="st-team"><span class="st-team-in">' + logo(r.squadra, 32) + '<span>' + r.nome + '</span></span></td>' +
-        '<td class="st-pt">' + r.pt + '</td><td>' + r.g + '</td><td>' + r.v + '</td><td>' + r.p + '</td>' +
-        '<td class="st-opt">' + r.pf + '</td><td class="st-opt">' + r.ps + '</td>' +
-        '<td class="st-diff' + (r.diff > 0 ? ' is-pos' : (r.diff < 0 ? ' is-neg' : '')) + '">' + diff + '</td></tr>';
-    }).join('');
-    var nota = document.getElementById('standingsNote');
-    if (nota) {
-      if (CL.aggiornata) {
-        var d = CL.aggiornata.split('-');
-        nota.textContent = 'Aggiornata al ' + d[2] + '/' + d[1] + '/' + d[0] + '.';
-      } else {
-        var prima = PARTITE.filter(function (m) { return m.giornata === 1; })[0];
-        nota.textContent = 'Il campionato non \u00e8 ancora iniziato' +
-          (prima ? ': la classifica si aggiorna dopo la 1\u00aa giornata (' + prima.data.split('-').reverse().join('/') + ').' : '.');
-      }
-    }
-  }
 })();
