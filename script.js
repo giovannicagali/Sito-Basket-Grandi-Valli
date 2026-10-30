@@ -312,12 +312,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ld.type = 'application/ld+json';
     ld.textContent = JSON.stringify(eventi);
     document.head.appendChild(ld);
-
-    // porta in vista la prossima partita se la stagione è già avanzata
-    var nx = list.querySelector('.is-next');
-    if (nx && list.querySelectorAll('.is-played').length > 2) {
-      window.scrollTo({ top: nx.getBoundingClientRect().top + window.scrollY - 120 });
-    }
   }
 
 })();
