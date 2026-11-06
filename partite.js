@@ -48,7 +48,7 @@ window.BGV_PARTITE = [
   { giornata: 1,  data: '2026-10-16', ora: '21:00', casa: 'bgv',        ospite: 'mantova', risultato: [59, 57] },
   { giornata: 2,  data: '2026-10-23', riposo: true },
   { giornata: 3,  data: '2026-10-29', ora: '21:15', casa: 'ostiglia',   ospite: 'bgv', risultato: [57, 64] },
-  { giornata: 4,  data: '2026-11-06', ora: '21:00', casa: 'bgv',        ospite: 'campagnola' },
+  { giornata: 4,  data: '2026-11-06', ora: '21:00', casa: 'bgv',        ospite: 'campagnola', risultato: [85, 56] },
   { giornata: 5,  data: '2026-11-12', ora: '21:30', casa: 'cerea',      ospite: 'bgv' },
   { giornata: 6,  data: '2026-11-20', ora: '21:00', casa: 'bgv',        ospite: 'greengiants' },
   { giornata: 7,  data: '2026-11-27', ora: '21:00', casa: 'zevio',      ospite: 'bgv' },
