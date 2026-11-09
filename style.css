@@ -508,7 +508,7 @@ section{ padding: 72px 0; position:relative; }
   align-items:center;
   gap: 16px;
   width: max-content;
-  animation: sponsor-scroll 42s linear infinite;
+  animation: sponsor-scroll 49s linear infinite;
 }
 .sponsor-marquee:hover .sponsor-track{ animation-play-state: paused; }
 .sponsor-item{
